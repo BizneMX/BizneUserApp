@@ -1,0 +1,200 @@
+{
+  "project_info": {
+    "project_number": "237563772625",
+    "firebase_url": "https://bizne-d53d6.firebaseio.com",
+    "project_id": "bizne-d53d6",
+    "storage_bucket": "bizne-d53d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237563772625:android:f413e14e81a11405640ff0",
+        "android_client_info": {
+          "package_name": "mx.bizne.kitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237563772625-qjd7kk8uvms09hsdb67u5jl7sd31116g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.bizne.kitchen",
+            "certificate_hash": "e7e28c6dbffd7d3b4ecb279b2c608eaa8db689a3"
+          }
+        },
+        {
+          "client_id": "237563772625-g994tedu6sioa3agu00t3l92t73026pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE_reXTFv3TexqZzrgC-rk7oznHzYlSE8"
+        },
+        {
+          "current_key": "AIzaSyAKZRa_G46XabacION5DLgol6CDAcNbl8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237563772625-g994tedu6sioa3agu00t3l92t73026pm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "237563772625-gba3gml8ejp3lcb1ebeb4pjb7fsd3d2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mx.com.bizn"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237563772625:android:974c5c6043d9f44e640ff0",
+        "android_client_info": {
+          "package_name": "mx.com.bizne.pos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237563772625-av07tjeeue0h17is6fgj6l6ak26suqf2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.com.bizne.pos",
+            "certificate_hash": "443fe9ef1256c4be27c9f63d9bbce333a3c3faba"
+          }
+        },
+        {
+          "client_id": "237563772625-keflugnr50625b4srlr3hrcq0a76tgfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.com.bizne.pos",
+            "certificate_hash": "93120fc7962c51a1544a4d9ba065e0c8f0e87cad"
+          }
+        },
+        {
+          "client_id": "237563772625-mq1chrheovfd6p3jdapebivi64n9gvlr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.com.bizne.pos",
+            "certificate_hash": "bb9390e5edab764f723d3becfec290c2daa2d3ca"
+          }
+        },
+        {
+          "client_id": "237563772625-o70pt0b07n0i05frhv5613tv1jgi0npo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.com.bizne.pos",
+            "certificate_hash": "7714d7d5705296a844528ef56e2b956f6cf72b73"
+          }
+        },
+        {
+          "client_id": "237563772625-g994tedu6sioa3agu00t3l92t73026pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE_reXTFv3TexqZzrgC-rk7oznHzYlSE8"
+        },
+        {
+          "current_key": "AIzaSyAKZRa_G46XabacION5DLgol6CDAcNbl8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237563772625-g994tedu6sioa3agu00t3l92t73026pm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "237563772625-gba3gml8ejp3lcb1ebeb4pjb7fsd3d2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mx.com.bizn"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237563772625:android:e4699d7f91b00e0f640ff0",
+        "android_client_info": {
+          "package_name": "mx.devbizne.bizne"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237563772625-58mpeghtoef9vda65s2ujepbmn29l31p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.devbizne.bizne",
+            "certificate_hash": "93120fc7962c51a1544a4d9ba065e0c8f0e87cad"
+          }
+        },
+        {
+          "client_id": "237563772625-8niu81a6h0dlsavaefj53i10jnm0dlg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.devbizne.bizne",
+            "certificate_hash": "443fe9ef1256c4be27c9f63d9bbce333a3c3faba"
+          }
+        },
+        {
+          "client_id": "237563772625-h7a5lro7d1ruo4bt93jou2mqirlf9bgu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.devbizne.bizne",
+            "certificate_hash": "5b1f26049416f6a487788736d7371b86a6c3a5ce"
+          }
+        },
+        {
+          "client_id": "237563772625-leo7sb1ladrmqrv1ail6cpmalook5l0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.devbizne.bizne",
+            "certificate_hash": "7714d7d5705296a844528ef56e2b956f6cf72b73"
+          }
+        },
+        {
+          "client_id": "237563772625-g994tedu6sioa3agu00t3l92t73026pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE_reXTFv3TexqZzrgC-rk7oznHzYlSE8"
+        },
+        {
+          "current_key": "AIzaSyAKZRa_G46XabacION5DLgol6CDAcNbl8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237563772625-g994tedu6sioa3agu00t3l92t73026pm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "237563772625-gba3gml8ejp3lcb1ebeb4pjb7fsd3d2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mx.com.bizn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
