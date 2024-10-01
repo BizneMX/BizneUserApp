@@ -5,6 +5,7 @@ import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/myBizne/repository.dart';
 import 'package:bizne_flutter_app/src/models/my_bizne.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +19,14 @@ class MyByzneController extends LayoutRouteController {
     super.onInit();
 
     connection() ? getMyBizne() : getMyBizneOffline();
+    FirebaseAnalytics.instance.logEvent(
+        name: 'main_menu', parameters: {'type': 'button', 'name': 'mi_saldo'});
+    // if (!connection()) {
+    //   Get.dialog(BizneDialog(
+    //       text:
+    //           '"No detectamos conexión a internet" Solo podrás pagar con QR, conéctate a una red de Internet para disfrutar de Bizne.',
+    //       onOk: () => Get.back()));
+    // }
   }
 
   RxList<MyBizne> data = <MyBizne>[].obs;
@@ -43,6 +52,7 @@ class MyByzneController extends LayoutRouteController {
     final json = prefs.getString('myBizne');
 
     data.add(MyBizne.fromJson(jsonDecode(json!)));
+    Get.dialog(const BizneOfflineDialog());
   }
 
   Future<void> getMyBizne() async {

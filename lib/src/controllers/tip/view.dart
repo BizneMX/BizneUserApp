@@ -6,6 +6,7 @@ import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/tip/controller.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -46,7 +47,7 @@ class TipPage extends LayoutRouteWidget<TipController> {
               key: const Key('Tips'),
               tips: controller.tips,
               onChange: (value) {
-                controller.tipSelected = value;
+                controller.tipSelected.value = int.parse(value);
               },
             )),
         const Expanded(child: SizedBox()),
@@ -60,14 +61,16 @@ class TipPage extends LayoutRouteWidget<TipController> {
         SizedBox(
           height: 1.h,
         ),
-        MyText(
-          color: AppThemes().green,
-          align: TextAlign.center,
-          text:
-              LocalizationFormatters.currencyFormat(currentParams.amountToPay),
-          fontSize: 24.sp,
-          type: FontType.bold,
-        ),
+        Obx(() => MyText(
+              color: AppThemes().green,
+              align: TextAlign.center,
+              text: LocalizationFormatters.currencyFormat(
+                  currentParams.amountToPay *
+                      (controller.tipSelected.value + 100) /
+                      100),
+              fontSize: 24.sp,
+              type: FontType.bold,
+            )),
         SizedBox(
           height: 3.h,
         ),

@@ -51,7 +51,7 @@ class EditPhonePage extends LayoutRouteWidget<EditPhoneController> {
 
     final buttonsArea =
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-      const BizneSupportButton(),
+      BizneSupportButton(analyticsCallFunction: () async {}),
       SizedBox(height: 3.h),
       BizneElevatedButton(
           onPressed: () {

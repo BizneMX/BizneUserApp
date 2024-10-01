@@ -3,6 +3,7 @@ import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/profile_home/repository.dart';
 import 'package:bizne_flutter_app/src/models/user.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,8 @@ class ProfileHomeController extends LayoutRouteController {
   @override
   void onInit() {
     super.onInit();
+    FirebaseAnalytics.instance.logEvent(
+        name: 'main_menu', parameters: {'type': 'button', 'name': 'perfil'});
 
     if (!connection()) return;
 

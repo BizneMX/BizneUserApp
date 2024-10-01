@@ -3,21 +3,20 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 class Environment {
-  static const baseUrl = 'https://services.bizne.com.mx/api/v12.3/';
-
-  static const menuBaseUrl = 'http://menu.bizne.com.mx/';
+  static const baseUrl = 'https://apipre.bizne.com.mx/api/v13.2/';
+  static const menuBaseUrl = 'https://menu.bizne.com.mx/';
 
   static const apiKey = "Bizne*2022!_";
 
   static const whatsappContact = '+525529475684';
 
-  static const googleApiKey = 'AIzaSyDakuTjAOjZKh6mxiTJ04-d6O-byXP3N9E';
+  static const googleApiKey = 'AIzaSyCjOMPkc0bqoUvIfNZPA9D-A98G-gCSczU';
 
   static const appDefaultLanguage = 'es';
 
   static const appBundleId = 'mx.devbizne.bizne';
 
-  static const spriteApiKey = 'pk_live_DkvamrO5o9lxFEY2Q6RVyV1l00Vjb5ZanJ';
+  static const spriteApiKey = 'pk_test_TZX4xTSTBKK1GwbTl7Wza9cv00cY9tcgu3';
 
   static const termsAndConditions =
       'https://newadmin.bizne.com.mx/#/documents/terms';

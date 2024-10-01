@@ -182,9 +182,11 @@ class CreditTipDropdownMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [Text(AppLocalizations.of(context)!.tip(tip))]);
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Text(tip == '0'
+          ? AppLocalizations.of(context)!.noTip
+          : AppLocalizations.of(context)!.tip(tip))
+    ]);
   }
 }
 
@@ -333,5 +335,72 @@ class DateDropdownMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: MyText(text: date.toDate()));
+  }
+}
+
+class TimeIntervalSelector extends StatefulWidget {
+  final String initialInterval;
+  final List<String> intervals;
+  final void Function(String) onChange;
+
+  const TimeIntervalSelector(
+      {super.key,
+      required this.initialInterval,
+      required this.onChange,
+      required this.intervals});
+
+  @override
+  State<TimeIntervalSelector> createState() => _TimeIntervalSelectorState();
+}
+
+class _TimeIntervalSelectorState extends State<TimeIntervalSelector> {
+  String selectedInterval = '';
+
+  @override
+  void initState() {
+    selectedInterval = widget.initialInterval;
+    super.initState();
+  }
+
+  List<String> intervals() => widget.intervals;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton2<String>(
+        underline: const SizedBox(),
+        buttonStyleData: ButtonStyleData(
+            decoration: BoxDecoration(
+                color: AppThemes().whiteInputs,
+                borderRadius: AppThemes().borderRadius)),
+        customButton: _buildDateButton(selectedInterval),
+        items: intervals().map((e) {
+          final interval = e;
+          return DropdownMenuItem<String>(
+              value: interval, child: Center(child: MyText(text: interval)));
+        }).toList(),
+        onChanged: (value) {
+          setState(() {
+            if (value != null) {
+              selectedInterval = value;
+              widget.onChange(value);
+            }
+          });
+        });
+  }
+
+  Widget _buildDateButton(String value) {
+    return Container(
+        height: 5.h,
+        decoration: BoxDecoration(
+            borderRadius: AppThemes().borderRadius,
+            color: AppThemes().whiteInputs),
+        child: Stack(children: [
+          Positioned(
+              right: 3.w,
+              top: 1.h,
+              child: Icon(Icons.keyboard_arrow_down_sharp,
+                  size: 20.sp, color: AppThemes().primary)),
+          Center(child: MyText(text: value))
+        ]));
   }
 }

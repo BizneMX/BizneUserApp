@@ -30,6 +30,8 @@ import 'package:bizne_flutter_app/src/controllers/home/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/how_you_want_pay/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/how_you_want_pay/view.dart';
 import 'package:bizne_flutter_app/src/controllers/myBizne/controller.dart';
+import 'package:bizne_flutter_app/src/controllers/my_reserves/controller.dart';
+import 'package:bizne_flutter_app/src/controllers/my_reserves/view.dart';
 import 'package:bizne_flutter_app/src/controllers/notifications/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/pay_food/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/pay_food/view.dart';
@@ -119,8 +121,10 @@ class LayoutController extends GetxController {
           widget: (dynamic param) => const MyByznePage()),
       LayoutRoute<AppController>(
           primary: true,
+          titleElevation: true,
           route: app,
           navigationBar: false,
+          buttonBack: true,
           index: 2,
           widget: (dynamic params) => const AppPage()),
       LayoutRoute<NotificationsController>(
@@ -200,10 +204,38 @@ class LayoutController extends GetxController {
           buttonBack: false,
           navigationBar: true),
       LayoutRoute<ScheduleFoodController>(
-          route: scheduleFood,
+          title: AppLocalizations.of(context)!.bookings,
+          buttonBack: true,
+          route: scheduleFoodRules,
           index: 0,
           navigationBar: false,
-          widget: (dynamic params) => ScheduleFoodPage(
+          widget: (dynamic params) => ScheduleFoodRulesPage(
+                params: params,
+              )),
+      LayoutRoute<ScheduleFoodController>(
+          title: AppLocalizations.of(context)!.bookingStepOne,
+          buttonBack: true,
+          route: scheduleFoodStepOne,
+          index: 0,
+          navigationBar: false,
+          widget: (dynamic params) => ScheduleFoodStepOnePage(
+                params: params,
+              )),
+      LayoutRoute<ScheduleFoodController>(
+          title: AppLocalizations.of(context)!.bookingStepTwo,
+          buttonBack: true,
+          route: scheduleFoodStepTwo,
+          index: 0,
+          navigationBar: false,
+          widget: (dynamic params) => ScheduleFoodStepTwoPage(
+                params: params,
+              )),
+      LayoutRoute<ScheduleFoodController>(
+          route: scheduleFoodCongratulations,
+          index: 0,
+          navigationBar: false,
+          popNavigate: false,
+          widget: (dynamic params) => ScheduleFoodCongratulationsPage(
                 params: params,
               ))
     ];
@@ -360,6 +392,12 @@ class LayoutController extends GetxController {
           navigationBar: false,
           index: 4,
           widget: (dynamic param) => const AddPaymentMethodPage()),
+      LayoutRoute<MyReserveController>(
+          route: myReserves,
+          buttonBack: true,
+          navigationBar: false,
+          index: 4,
+          widget: (dynamic param) => const MyReservesPage())
     ];
 
     secondaryRoutes = [

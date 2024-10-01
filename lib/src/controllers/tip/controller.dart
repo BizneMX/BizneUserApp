@@ -8,14 +8,14 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class TipController extends LayoutRouteController {
-  final tips = ['10', '20', '30'];
-  var tipSelected = '10';
+  final tips = ['0', '10', '20', '30'];
+  var tipSelected = 0.obs;
 
   final repo = HowYouWantPayRepo();
   Future<void> payTicket(TipParams params) async {
     EasyLoading.show();
     final response = await repo.payTicket(
-        int.parse(tipSelected),
+        tipSelected.value,
         params.cardId != -1,
         params.cardId,
         '12345',

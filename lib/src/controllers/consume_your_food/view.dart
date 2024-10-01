@@ -4,6 +4,7 @@ import 'package:bizne_flutter_app/src/components/utils.dart';
 import 'package:bizne_flutter_app/src/controllers/consume_your_food/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,7 +15,7 @@ class ConsumeYourFoodPage extends LayoutRouteWidget<ConsumeYourFoodController> {
   @override
   Widget build(BuildContext context) {
     final currentParams = params as ConsumeYourFoodParams;
-  
+
     return Column(
       children: [
         SizedBox(height: 4.h),
@@ -31,7 +32,9 @@ class ConsumeYourFoodPage extends LayoutRouteWidget<ConsumeYourFoodController> {
                     text: '${AppLocalizations.of(context)!.youHavePay} ',
                     color: AppThemes().primary,
                     children: [
-                    MyTextSpan(text: AppLocalizations.of(context)!.inCash, type: FontType.bold)
+                    MyTextSpan(
+                        text: AppLocalizations.of(context)!.inCash,
+                        type: FontType.bold)
                   ])),
         SizedBox(
           height: 2.h,
@@ -115,22 +118,36 @@ class ConsumeYourFoodPage extends LayoutRouteWidget<ConsumeYourFoodController> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
           child: BizneElevatedButton(
-            onPressed: () =>
-                controller.transactionConfirm(currentParams, false),
+            onPressed: () => FirebaseAnalytics.instance
+                .logEvent(name: 'compra', parameters: {
+              'type': 'button',
+              'name': 'en_fonda',
+              'store_id': currentParams.establishment.id.toString()
+            }).then((_) => controller.transactionConfirm(currentParams, false)),
             title: AppLocalizations.of(context)!.inTheService,
           ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
           child: BizneElevatedButton(
-            onPressed: () => controller.transactionConfirm(currentParams, true),
+            onPressed: () => FirebaseAnalytics.instance
+                .logEvent(name: 'compra', parameters: {
+              'type': 'button',
+              'name': 'recoger',
+              'store_id': currentParams.establishment.id.toString()
+            }).then((_) => controller.transactionConfirm(currentParams, true)),
             title: AppLocalizations.of(context)!.toPickUp,
           ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
           child: BizneElevatedButton(
-            onPressed: () => controller.popNavigate(),
+            onPressed: () => FirebaseAnalytics.instance
+                .logEvent(name: 'compra', parameters: {
+              'type': 'button',
+              'name': 'regresar',
+              'store_id': currentParams.establishment.id.toString()
+            }).then((_) => controller.popNavigate()),
             title: AppLocalizations.of(context)!.returnText,
             secondary: true,
           ),

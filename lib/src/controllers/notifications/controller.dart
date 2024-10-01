@@ -3,6 +3,7 @@ import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/notifications/repository.dart';
 import 'package:bizne_flutter_app/src/models/notification.dart';
 import 'package:bizne_flutter_app/src/models/pagination_data.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,13 @@ class NotificationsController extends LayoutRouteController {
   var notNotifications = false.obs;
   var isLoading = false;
   var notifications = <NotificationModel>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    FirebaseAnalytics.instance.logEvent(
+        name: 'main_menu', parameters: {'type': 'button', 'name': 'alertas'});
+  }
 
   void seeMore() {
     getNotifications();

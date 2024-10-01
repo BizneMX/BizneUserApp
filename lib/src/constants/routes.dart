@@ -23,7 +23,10 @@ const profileHome = '/profile-home';
 const changeLocation = '/change-location';
 const serviceDetails = '/service-details';
 const restaurantDetails = '/restaurant-details';
-const scheduleFood = '/schedule-food';
+const scheduleFoodRules = '/schedule-food-rules';
+const scheduleFoodStepOne = '/schedule-food-step-one';
+const scheduleFoodStepTwo = '/schedule-food-step-two';
+const scheduleFoodCongratulations = '/schedule-food-congratulations';
 
 // profile
 const termsAndConditions = '/terms-and-conditions';
@@ -36,6 +39,7 @@ const changePassword = '/change-password';
 const editProfile = '/edit-profile';
 const paymentMethods = '/payment-methods';
 const addPaymentMethod = '/add-payment-method';
+const myReserves = '/"myReserves';
 
 // my bizne
 const consumeHistory = '/consume-history';

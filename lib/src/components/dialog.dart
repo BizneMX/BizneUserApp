@@ -3,6 +3,7 @@ import 'package:bizne_flutter_app/src/components/my_text.dart';
 import 'package:bizne_flutter_app/src/components/utils.dart';
 import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/controllers/myBizne/view.dart';
+import 'package:bizne_flutter_app/src/controllers/schedule_food/view.dart';
 import 'package:bizne_flutter_app/src/models/history_food.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
 import 'package:flutter/material.dart';
@@ -760,6 +761,83 @@ class SelectAmountDialog extends StatelessWidget {
                   heightFactor: 0.04,
                   onPressed: cancelButton,
                   title: AppLocalizations.of(context)!.cancel)
+            ])));
+  }
+}
+
+class MyReservesDialog extends StatelessWidget {
+  const MyReservesDialog({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Container(
+            padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 5.w),
+            decoration: BoxDecoration(
+                color: AppThemes().background,
+                borderRadius: AppThemes().borderRadius),
+            width: 80.w,
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              MyText(
+                  text: AppLocalizations.of(context)!.reserveRules,
+                  align: TextAlign.center,
+                  color: AppThemes().primary,
+                  type: FontType.bold,
+                  fontSize: 16.sp),
+              SizedBox(
+                height: 2.h,
+              ),
+              BookingRules(
+                padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
+                fontSize: 12.sp,
+              ),
+              SizedBox(height: 3.h),
+              BizneElevatedButton(
+                  heightFactor: 0.04,
+                  onPressed: () => Get.back(),
+                  title: AppLocalizations.of(context)!.understood),
+            ])));
+  }
+}
+
+class BizneOfflineDialog extends StatelessWidget {
+  const BizneOfflineDialog({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Container(
+            padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 5.w),
+            decoration: BoxDecoration(
+                color: AppThemes().background,
+                borderRadius: AppThemes().borderRadius),
+            width: 80.w,
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              MyText(
+                  text: 'Atención',
+                  align: TextAlign.center,
+                  color: AppThemes().primary,
+                  type: FontType.bold,
+                  fontSize: 16.sp),
+              SizedBox(
+                height: 2.h,
+              ),
+              MyText(
+                  text:
+                      '"No detectamos conexión a internet" Solo podrás pagar con QR, conéctate a una red de Internet para disfrutar de Bizne.',
+                  align: TextAlign.center,
+                  color: AppThemes().primary,
+                  type: FontType.bold,
+                  fontSize: 14.sp),
+              SizedBox(height: 3.h),
+              BizneElevatedButton(
+                  heightFactor: 0.04,
+                  onPressed: () => Get.back(),
+                  title: AppLocalizations.of(context)!.understood),
             ])));
   }
 }

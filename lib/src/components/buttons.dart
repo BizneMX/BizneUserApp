@@ -191,13 +191,16 @@ class BizneElevatedChildButton extends StatelessWidget {
 
 class BizneSupportButton extends StatelessWidget {
   final bool secondary;
-  const BizneSupportButton({super.key, this.secondary = true});
+  final Future Function() analyticsCallFunction;
+  const BizneSupportButton(
+      {super.key, this.secondary = true, required this.analyticsCallFunction});
 
   @override
   Widget build(BuildContext context) {
     return BizneElevatedChildButton(
         secondary: secondary,
         onPressed: () async {
+          await analyticsCallFunction();
           await Utils.contactSupport();
         },
         child: Row(
@@ -224,12 +227,14 @@ class BizneSupportButton extends StatelessWidget {
 }
 
 class BizneSupportMyBizneButton extends StatelessWidget {
-  const BizneSupportMyBizneButton({super.key});
+  final Future Function()? firebaseCall;
+  const BizneSupportMyBizneButton({super.key, this.firebaseCall});
 
   @override
   Widget build(BuildContext context) {
     return BizneElevatedChildButton(
         onPressed: () async {
+          if (firebaseCall != null) await firebaseCall!();
           await Utils.contactSupport();
         },
         child: Row(

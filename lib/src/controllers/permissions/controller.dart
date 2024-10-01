@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,12 @@ import '../../services/location.dart';
 
 class PermissionController extends GetxController {
   Rx<Permission> actualPermission = Permission.location.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    FirebaseAnalytics.instance.logEvent(name: 'location');
+  }
 
   int permissionToInt() {
     switch (actualPermission.value) {
@@ -26,6 +33,8 @@ class PermissionController extends GetxController {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
+        await FirebaseAnalytics.instance.logEvent(
+            name: 'location', parameters: {'type': 'button', 'name': 'deny'});
         await func();
       }
     } while (permission == LocationPermission.denied ||
@@ -33,7 +42,10 @@ class PermissionController extends GetxController {
 
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('locationPermission', true);
+    await FirebaseAnalytics.instance.logEvent(
+        name: 'location', parameters: {'type': 'button', 'name': 'allow'});
     await Get.putAsync(() => LocationProvide().init());
+    await FirebaseAnalytics.instance.logEvent(name: 'notifications');
     actualPermission.value = Permission.notification;
   }
 
@@ -43,12 +55,16 @@ class PermissionController extends GetxController {
     await Firebase.initializeApp();
     await NotificationHandler().init();
     await PushNotifications().init();
+    await FirebaseAnalytics.instance.logEvent(
+        name: 'notifications', parameters: {'type': 'button', 'name': 'allow'});
     endWelcome();
   }
 
   void deniedNotification() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('notificationPermission', false);
+    await FirebaseAnalytics.instance.logEvent(
+        name: 'notifications', parameters: {'type': 'button', 'name': 'deny'});
     endWelcome();
   }
 

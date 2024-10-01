@@ -7,6 +7,11 @@ import 'package:sizer/sizer.dart';
 import '../../components/buttons.dart';
 import 'controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+// FirebaseAnalytics.instance.logEvent(name: 'registered_user');
+// FirebaseAnalytics.instance.logEvent(name: 'new_user');
+// FirebaseAnalytics.instance.logEvent(name: 'help');
 
 class SplashPage extends GetView<SplashController> {
   const SplashPage({super.key});
@@ -74,19 +79,25 @@ class WelcomePage extends StatelessWidget {
       SizedBox(height: 6.h),
       Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         entranceOption('old_user', AppLocalizations.of(context)!.iHaveAccount,
-            () {
+            () async {
+          await FirebaseAnalytics.instance.logEvent(name: 'registered_user');
           Get.toNamed(login, arguments: false);
         }, AppThemes().secondary, false),
-        entranceOption('new_user', AppLocalizations.of(context)!.iAmNew, () {
+        entranceOption('new_user', AppLocalizations.of(context)!.iAmNew,
+            () async {
+          await FirebaseAnalytics.instance.logEvent(name: 'new_user');
           Get.toNamed(login, arguments: true);
         }, AppThemes().tertiary, false)
       ])
     ]);
 
-    const buttonArea =
+    final buttonArea =
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       BizneSupportButton(
         secondary: false,
+        analyticsCallFunction: () async {
+          await FirebaseAnalytics.instance.logEvent(name: 'help');
+        },
       ),
     ]);
 

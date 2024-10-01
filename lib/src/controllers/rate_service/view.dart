@@ -5,6 +5,7 @@ import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/rate_service/controller.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,63 +34,64 @@ class RateServicePage extends LayoutRouteWidget<RateServiceController> {
         ));
 
     return SingleChildScrollView(
-      child: SizedBox(
-        height: 100.h,
-        width: 100.w,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 4.h,
-            ),
-            MyText(
-              text: AppLocalizations.of(context)!.rateService,
-              fontSize: 20.sp,
-              type: FontType.bold,
-            ),
-            SizedBox(
-              height: 4.h,
-            ),
-            Container(
-              width: 20.w,
-              height: 20.w,
-              decoration: BoxDecoration(borderRadius: AppThemes().borderRadius),
-              child: Image.network(currentParams.establishment.logoPic!),
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            rateArea,
-            SizedBox(
-              height: 3.h,
-            ),
-            SizedBox(
-              width: 70.w,
-              child: BizneTextField(
-                hint: AppLocalizations.of(context)!.writeComment,
-                controller: controller.commentController,
-                onSubmited: () => controller.rateService(currentParams),
-                maxLines: 6,
+        child: SizedBox(
+            height: 100.h,
+            width: 100.w,
+            child: Column(children: [
+              SizedBox(
+                height: 4.h,
               ),
-            ),
-            SizedBox(
-              height: 6.h,
-            ),
-            Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
-                child: BizneElevatedButton(
-                    onPressed: () => controller.rateService(currentParams),
-                    title: AppLocalizations.of(context)!.rate)),
-            Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
-                child: BizneElevatedButton(
-                    secondary: true,
-                    onPressed: () => controller.navigate(home),
-                    title: AppLocalizations.of(context)!.skip))
-          ],
-        ),
-      ),
-    );
+              MyText(
+                text: AppLocalizations.of(context)!.rateService,
+                fontSize: 20.sp,
+                type: FontType.bold,
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              Container(
+                width: 20.w,
+                height: 20.w,
+                decoration:
+                    BoxDecoration(borderRadius: AppThemes().borderRadius),
+                child: Image.network(currentParams.establishment.logoPic!),
+              ),
+              SizedBox(height: 5.h),
+              rateArea,
+              SizedBox(height: 3.h),
+              SizedBox(
+                  width: 70.w,
+                  child: BizneTextField(
+                      hint: AppLocalizations.of(context)!.writeComment,
+                      controller: controller.commentController,
+                      onSubmited: () => controller.rateService(currentParams),
+                      maxLines: 6)),
+              SizedBox(height: 6.h),
+              Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
+                  child: BizneElevatedButton(
+                      onPressed: () => FirebaseAnalytics.instance
+                              .logEvent(name: 'confirmacion', parameters: {
+                            'type': 'button',
+                            'name': 'calificar',
+                            'store_id':
+                                currentParams.establishment.id.toString()
+                          }).then((_) => controller.rateService(currentParams)),
+                      title: AppLocalizations.of(context)!.rate)),
+              Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
+                  child: BizneElevatedButton(
+                      secondary: true,
+                      onPressed: () => FirebaseAnalytics.instance
+                              .logEvent(name: 'confirmacion', parameters: {
+                            'type': 'button',
+                            'name': 'saltar',
+                            'store_id':
+                                currentParams.establishment.id.toString()
+                          }).then((_) => controller.navigate(home)),
+                      title: AppLocalizations.of(context)!.skip))
+            ])));
   }
 }

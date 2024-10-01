@@ -1,9 +1,11 @@
 import 'package:bizne_flutter_app/src/components/buttons.dart';
+import 'package:bizne_flutter_app/src/components/dialog.dart';
 import 'package:bizne_flutter_app/src/components/my_text.dart';
 import 'package:bizne_flutter_app/src/components/utils.dart';
 import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/models/establishmet.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -101,29 +103,23 @@ class CardItemService extends GetWidget<HomeController> {
                                         children: [
                                           Row(children: [
                                             MyText(
-                                              fontSize: 13.5.sp,
-                                              text:
-                                                  Utils.truncateText(item.name),
-                                              type: FontType.bold,
-                                            ),
-                                            SizedBox(
-                                              width: 3.w,
-                                            ),
+                                                fontSize: 13.5.sp,
+                                                text: Utils.truncateText(
+                                                    item.name),
+                                                type: FontType.bold),
+                                            SizedBox(width: 3.w),
                                             MyText(
                                                 type: FontType.semibold,
                                                 fontSize: 12.5.sp,
                                                 text: Utils.formattedDistance(
                                                     item.distance)),
-                                            SizedBox(
-                                              width: 3.w,
-                                            ),
+                                            SizedBox(width: 3.w),
                                             item.favorite
                                                 ? Icon(
                                                     color:
                                                         AppThemes().secondary,
                                                     Icons.favorite,
-                                                    size: 13.sp,
-                                                  )
+                                                    size: 13.sp)
                                                 : const SizedBox()
                                           ]),
                                           Row(children: [
@@ -146,9 +142,35 @@ class CardItemService extends GetWidget<HomeController> {
                                                   horizontal: 1.w),
                                               child: BizneElevatedButton(
                                                   heightFactor: 0.03,
-                                                  onPressed: () => navigate(
-                                                      scheduleFood,
-                                                      params: item),
+                                                  onPressed: () async {
+                                                    await FirebaseAnalytics
+                                                        .instance
+                                                        .logEvent(
+                                                            name: 'main_navbar',
+                                                            parameters: {
+                                                          'type': 'button',
+                                                          'name': 'agendar',
+                                                          'store_id':
+                                                              item.id.toString()
+                                                        });
+                                                    if (item.allowBookings) {
+                                                      if (item.closed) {
+                                                        await Get.dialog(
+                                                            const EstablishmentClosedDialog());
+                                                        return;
+                                                      }
+                                                      navigate(
+                                                          scheduleFoodRules,
+                                                          params: item);
+                                                    } else {
+                                                      await Get.dialog(BizneDialog(
+                                                          text: AppLocalizations
+                                                                  // ignore: use_build_context_synchronously
+                                                                  .of(context)!
+                                                              .noBokkingsAvailable,
+                                                          onOk: () => Get.back()));
+                                                    }
+                                                  },
                                                   title: AppLocalizations.of(
                                                           context)!
                                                       .schedule1,
@@ -160,16 +182,25 @@ class CardItemService extends GetWidget<HomeController> {
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 1.w),
                                               child: BizneElevatedButton(
-                                                color: AppThemes().secondary,
-                                                heightFactor: 0.03,
-                                                textSize: 9.sp,
-                                                onPressed: () => navigate(
-                                                    serviceDetails,
-                                                    params: item),
-                                                title: AppLocalizations.of(
-                                                        context)!
-                                                    .seeMenu,
-                                              ))),
+                                                  color: AppThemes().secondary,
+                                                  heightFactor: 0.03,
+                                                  textSize: 9.sp,
+                                                  onPressed: () {
+                                                    FirebaseAnalytics.instance
+                                                        .logEvent(
+                                                            name: 'menu',
+                                                            parameters: {
+                                                          'type': 'button',
+                                                          'name': 'ver',
+                                                          'store_id':
+                                                              item.id.toString()
+                                                        });
+                                                    navigate(serviceDetails,
+                                                        params: item);
+                                                  },
+                                                  title: AppLocalizations.of(
+                                                          context)!
+                                                      .seeMenu))),
                                       Expanded(
                                           flex: 1,
                                           child: Padding(
@@ -180,8 +211,18 @@ class CardItemService extends GetWidget<HomeController> {
                                                   color: AppThemes().secondary,
                                                   heightFactor: 0.03,
                                                   textSize: 9.sp,
-                                                  onPressed: () =>
-                                                      eatHere(item),
+                                                  onPressed: () {
+                                                    FirebaseAnalytics.instance
+                                                        .logEvent(
+                                                            name: 'menu',
+                                                            parameters: {
+                                                          'type': 'button',
+                                                          'name': 'come_aqui',
+                                                          'store_id':
+                                                              item.id.toString()
+                                                        });
+                                                    eatHere(item);
+                                                  },
                                                   title: AppLocalizations.of(
                                                           context)!
                                                       .eatHere)))

@@ -6,6 +6,7 @@ import 'package:bizne_flutter_app/src/components/utils.dart';
 import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/pay_food/controller.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -43,7 +44,7 @@ class PayFoodPage extends LayoutRouteWidget<PayFoodController> {
                 //       .theMinimumAmountToPay(currentParams.menuPrice);
                 //   return '';
                 // }
-                
+
                 if (int.parse(value) > currentParams.todayBzCoins) {
                   controller.info.value =
                       AppLocalizations.of(context)!.youWillHaveToPayDifference;
@@ -244,18 +245,32 @@ class PayFoodPage extends LayoutRouteWidget<PayFoodController> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
                 child: BizneElevatedButton(
-                  onPressed: () => controller.continueButton(currentParams),
+                  onPressed: () async {
+                    await FirebaseAnalytics.instance
+                        .logEvent(name: 'compra', parameters: {
+                      'type': 'button',
+                      'name': 'continuar',
+                      'store_id': currentParams.establishment.id.toString()
+                    });
+                    controller.continueButton(currentParams);
+                  },
                   title: AppLocalizations.of(context)!.continueText,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-                child: BizneElevatedButton(
-                  onPressed: () => controller.popNavigate(),
-                  title: AppLocalizations.of(context)!.cancel,
-                  secondary: true,
-                ),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                  child: BizneElevatedButton(
+                      onPressed: () async {
+                        FirebaseAnalytics.instance
+                            .logEvent(name: 'compra', parameters: {
+                          'type': 'button',
+                          'name': 'cancelar',
+                          'store_id': currentParams.establishment.id.toString()
+                        });
+                        controller.popNavigate();
+                      },
+                      title: AppLocalizations.of(context)!.cancel,
+                      secondary: true)),
               SizedBox(height: 2.h)
             ])));
   }

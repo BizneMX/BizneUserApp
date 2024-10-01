@@ -132,7 +132,9 @@ class RecoverPasswordPage extends GetWidget<RecoverPasswordController> {
           },
           title: AppLocalizations.of(context)!.send),
       SizedBox(height: 3.h),
-      const BizneSupportButton(),
+      BizneSupportButton(
+        analyticsCallFunction: () async {},
+      ),
     ]);
 
     return Scaffold(

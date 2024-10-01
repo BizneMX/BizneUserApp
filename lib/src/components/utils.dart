@@ -163,12 +163,28 @@ class LocalizationFormatters {
   }
 
   static String dateFormat2(DateTime date) {
-    DateFormat dateFormat = DateFormat('d MMMM y hh:mm', 'es');
+    DateFormat dateFormat = DateFormat('d MMMM y, hh:mm', 'es');
     return dateFormat.format(date).replaceAll('.', '');
   }
 
   static String dateFormat3(DateTime date) {
     DateFormat dateFormat = DateFormat('d MMM y', 'es');
+    return dateFormat.format(date).replaceAll('.', '');
+  }
+
+  static String dateFormat4(DateTime date) {
+    DateFormat dateFormat = DateFormat("dd/MMM/yyyy", "es_ES");
+    return dateFormat.format(date).replaceAll('.', '');
+  }
+
+  static String dateFormat5(DateTime date) {
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd", "es_ES");
+    return dateFormat.format(date).replaceAll('.', '');
+  }
+
+  static String dateFormat6(String inputDate) {
+    DateTime date = DateTime.parse(inputDate);
+    DateFormat dateFormat = DateFormat('hh:mm', 'es');
     return dateFormat.format(date).replaceAll('.', '');
   }
 }

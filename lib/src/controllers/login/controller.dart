@@ -4,6 +4,7 @@ import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/controllers/login/repository.dart';
 import 'package:bizne_flutter_app/src/controllers/verification_code/controller.dart';
 import 'package:bizne_flutter_app/src/models/user.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -88,6 +89,9 @@ class LoginController extends GetxController {
       return;
     }
 
+    FirebaseAnalytics.instance.logEvent(
+        name: 'start_registration',
+        parameters: {'type': 'button', 'name': 'continue'});
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('jumpWelcome', true);
     final checkedPermissions = prefs.getBool('checkedPermissions');

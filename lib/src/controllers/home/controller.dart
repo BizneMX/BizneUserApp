@@ -11,6 +11,7 @@ import 'package:bizne_flutter_app/src/models/establishmet.dart';
 import 'package:bizne_flutter_app/src/models/marker.dart';
 import 'package:bizne_flutter_app/src/models/pagination_data.dart';
 import 'package:bizne_flutter_app/src/services/location.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -176,7 +177,18 @@ class HomeController extends LayoutRouteController {
       .where((element) => !(element.fonda ^ selectedService.value))
       .toList());
 
-  void changeFilter(int index) {
+  void changeFilter(int index) async {
+    String firebaseOption = "";
+    if (index == 1) {
+      firebaseOption = 'mas_cercanas';
+    } else if (index == 2) {
+      firebaseOption = 'favoritas';
+    } else if (index == 3) {
+      firebaseOption = 'abiertas';
+    }
+    await FirebaseAnalytics.instance.logEvent(
+        name: 'map', parameters: {'type': 'button', 'name': firebaseOption});
+
     if (activeFilter.value == index) {
       return;
     }

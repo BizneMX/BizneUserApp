@@ -31,7 +31,8 @@ class NotificationsPage extends LayoutRouteWidget<NotificationsController> {
                     child: MyText(
                       fontSize: 12.sp,
                       color: AppThemes().primary,
-                      text: AppLocalizations.of(context)!.noNotificationsAvailable,
+                      text: AppLocalizations.of(context)!
+                          .noNotificationsAvailable,
                       type: FontType.bold,
                     ),
                   ))

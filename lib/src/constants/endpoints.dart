@@ -44,4 +44,7 @@ class EndPoints {
   static const setFavorite = 'user/setAsFavorite';
   static const checkApp = 'user/isExpired';
   static const recoverToken = 'user/recoverToken';
+  static const initBooking = 'user/booking/init';
+  static const confirmBooking = 'user/booking/confirm';
+  static const myReserves = 'user/bookings';
 }

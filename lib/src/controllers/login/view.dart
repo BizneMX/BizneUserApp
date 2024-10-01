@@ -3,6 +3,7 @@ import 'package:bizne_flutter_app/src/components/my_text.dart';
 import 'package:bizne_flutter_app/src/components/text_filed.dart';
 import 'package:bizne_flutter_app/src/controllers/login/controller.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -102,7 +103,13 @@ class LoginPage extends GetWidget<LoginController> {
           },
           title: AppLocalizations.of(context)!.continueText),
       SizedBox(height: 3.h),
-      const BizneSupportButton(),
+      BizneSupportButton(
+        analyticsCallFunction: () async {
+          await FirebaseAnalytics.instance.logEvent(
+              name: 'start_registration',
+              parameters: {'type': 'button', 'name': 'help'});
+        },
+      ),
     ]);
 
     return Scaffold(

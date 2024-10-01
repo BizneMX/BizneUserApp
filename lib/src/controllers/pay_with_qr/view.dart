@@ -19,7 +19,7 @@ class PayWithQRPage extends LayoutRouteWidget<PayWithQRController> {
     return Column(
       children: [
         SizedBox(
-          height: 5.h,
+          height: 4.h,
         ),
         MyText(
             text: AppLocalizations.of(context)!.youCanOnlyPayWithMethod,
@@ -27,11 +27,11 @@ class PayWithQRPage extends LayoutRouteWidget<PayWithQRController> {
             fontSize: 12.sp,
             type: FontType.semibold),
         SizedBox(
-          height: 3.h,
+          height: 2.h,
         ),
         Container(
           width: 60.w,
-          height: 6.h,
+          height: 5.h,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 color: AppThemes().grey.withOpacity(0.5),
@@ -63,7 +63,7 @@ class PayWithQRPage extends LayoutRouteWidget<PayWithQRController> {
           ),
         ),
         SizedBox(
-          height: 8.h,
+          height: 6.h,
         ),
         SizedBox(
           width: 80.w,
@@ -75,7 +75,7 @@ class PayWithQRPage extends LayoutRouteWidget<PayWithQRController> {
               type: FontType.semibold),
         ),
         SizedBox(
-          height: 5.h,
+          height: 3.h,
         ),
         QrImageView(
           data: currentParams.shareCode,
@@ -90,6 +90,15 @@ class PayWithQRPage extends LayoutRouteWidget<PayWithQRController> {
           color: AppThemes().primary,
           type: FontType.semibold,
           fontSize: 12.sp,
+        ),
+        SizedBox(height: 2.h),
+        SizedBox(
+          width: 70.w,
+          child: MyText(
+            text: AppLocalizations.of(context)!.payWithQRInfo.toUpperCase(),
+            color: AppThemes().negative,
+            type: FontType.semibold,
+          ),
         ),
         const Expanded(child: SizedBox()),
         Padding(

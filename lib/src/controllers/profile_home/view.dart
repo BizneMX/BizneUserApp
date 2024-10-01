@@ -4,6 +4,7 @@ import 'package:bizne_flutter_app/src/components/profiler_avatar.dart';
 import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/profile_home/controller.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -50,20 +51,49 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
         ...[
           (
             AppLocalizations.of(context)!.profile,
-            () => controller.navigate(profile, params: controller.user[0])
+            () async {
+              await FirebaseAnalytics.instance.logEvent(
+                  name: 'perfil',
+                  parameters: {'type': 'button', 'name': 'perfil'});
+              controller.navigate(profile, params: controller.user[0]);
+            }
           ),
           (
             AppLocalizations.of(context)!.consumptionHistory,
-            controller.consumptionHistoryButton
+            () async {
+              await FirebaseAnalytics.instance.logEvent(
+                  name: 'perfil',
+                  parameters: {'type': 'button', 'name': 'historial_consumo'});
+              controller.consumptionHistoryButton();
+            }
           ),
           (
             AppLocalizations.of(context)!.foodHistory,
-            () => controller.navigate(historyFood)
+            () async {
+              await FirebaseAnalytics.instance.logEvent(
+                  name: 'perfil',
+                  parameters: {'type': 'button', 'name': 'historial_comidas'});
+              controller.navigate(historyFood);
+            }
+          ),
+          (
+            AppLocalizations.of(context)!.myReserves,
+            () async {
+              await FirebaseAnalytics.instance.logEvent(
+                  name: 'perfil',
+                  parameters: {'type': 'button', 'name': 'mis_reservas'});
+              controller.navigate(myReserves);
+            }
           ),
           (
             AppLocalizations.of(context)!.legal,
-            () => controller.navigate(termsAndConditions,
-                params: controller.user[0])
+            () async {
+              await FirebaseAnalytics.instance.logEvent(
+                  name: 'perfil',
+                  parameters: {'type': 'button', 'name': 'legal'});
+              controller.navigate(termsAndConditions,
+                  params: controller.user[0]);
+            }
           ),
           (
             AppLocalizations.of(context)!.logout,
@@ -83,7 +113,11 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w),
-          child: const BizneSupportMyBizneButton(),
+          child: BizneSupportMyBizneButton(
+            firebaseCall: () => FirebaseAnalytics.instance.logEvent(
+                name: 'perfil',
+                parameters: {'type': 'button', 'name': 'ayuda'}),
+          ),
         ),
         SizedBox(
           height: 4.h,

@@ -20,6 +20,7 @@ class Establishment {
   bool favorite;
   String? logoPic;
   String? menuPic;
+  bool allowBookings;
 
   Establishment(
       {required this.id,
@@ -42,7 +43,8 @@ class Establishment {
       required this.address,
       required this.favorite,
       this.logoPic,
-      this.menuPic});
+      this.menuPic,
+      required this.allowBookings});
 
   static Establishment fromJson(Map<String, dynamic> json) {
     return Establishment(
@@ -66,6 +68,7 @@ class Establishment {
         address: json["address"],
         logoPic: json["logo_pic"],
         menuPic: json["menu_pic"],
-        favorite: json["favorite"]);
+        favorite: json["favorite"],
+        allowBookings: json['allow_bookings'] ?? false);
   }
 }

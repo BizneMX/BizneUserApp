@@ -6,6 +6,7 @@ import 'package:bizne_flutter_app/src/controllers/web_view/view.dart';
 import 'package:bizne_flutter_app/src/environment.dart';
 import 'package:bizne_flutter_app/src/models/organization.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,9 @@ class RegisterPage extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     Widget buildPage() {
+      FirebaseAnalytics.instance.logEvent(
+          name: 'registration',
+          parameters: {'name': 'step_${controller.selectedPage.value + 1}'});
       switch (controller.selectedPage.value) {
         case 0:
           return NamePage(nextPage: () => controller.nextPage());
@@ -38,10 +42,19 @@ class RegisterPage extends GetView<RegisterController> {
     final whileRegister =
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       BizneElevatedButton(
-          onPressed: () => controller.nextPage(),
+          onPressed: () async {
+            await FirebaseAnalytics.instance.logEvent(
+                name: 'registration',
+                parameters: {'type': 'button', 'name': 'continue'});
+            controller.nextPage();
+          },
           title: AppLocalizations.of(context)!.continueText),
       SizedBox(height: 3.h),
-      const BizneSupportButton(),
+      BizneSupportButton(analyticsCallFunction: () async {
+        FirebaseAnalytics.instance.logEvent(
+            name: 'registration',
+            parameters: {'type': 'button', 'name': 'help'});
+      }),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         MyText(
             text: AppLocalizations.of(context)!.alreadyHaveAccount,
@@ -103,7 +116,11 @@ class RegisterPage extends GetView<RegisterController> {
               onPressed: () => controller.register(),
               title: AppLocalizations.of(context)!.finish),
           SizedBox(height: 3.h),
-          const BizneSupportButton(),
+          BizneSupportButton(analyticsCallFunction: () async {
+            FirebaseAnalytics.instance.logEvent(
+                name: 'registration',
+                parameters: {'type': 'button', 'name': 'help'});
+          })
         ]));
 
     final buttonArea = Obx(() => controller.selectedPage.value == 3
@@ -602,13 +619,23 @@ class OrganizationPage extends GetWidget<OrganizationController> {
               SizedBox(height: 2.h),
               BizneElevatedButton(
                   heightFactor: 0.04,
-                  onPressed: () => Get.back(result: true),
+                  onPressed: () async {
+                    await FirebaseAnalytics.instance.logEvent(
+                        name: 'registration',
+                        parameters: {'type': 'button', 'name': 'select'});
+                    Get.back(result: true);
+                  },
                   title: AppLocalizations.of(context)!.select),
               SizedBox(height: 2.h),
               BizneElevatedButton(
                   secondary: true,
                   heightFactor: 0.04,
-                  onPressed: () => Get.back(result: false),
+                  onPressed: () async {
+                    await FirebaseAnalytics.instance.logEvent(
+                        name: 'registration',
+                        parameters: {'type': 'button', 'name': 'back'});
+                    Get.back(result: false);
+                  },
                   title: AppLocalizations.of(context)!.returnText)
             ]))));
   }
@@ -816,6 +843,13 @@ class _OrganizationSearcherState extends State<OrganizationSearcher> {
         }
       }
     });
+
+    textController.addListener(() {
+      setState(() {
+        selected = 1;
+      });
+    });
+
     super.initState();
   }
 
@@ -861,14 +895,13 @@ class _OrganizationSearcherState extends State<OrganizationSearcher> {
                             }),
                             SizedBox(height: 1.h),
                             SizedBox(
-                              width: 10.h,
-                              child: MyText(
-                                  align: TextAlign.center,
-                                  text: organizations[i * 3 + j].name,
-                                  color: AppThemes().secondary,
-                                  fontSize: 10.sp,
-                                  type: FontType.bold),
-                            )
+                                width: 10.h,
+                                child: MyText(
+                                    align: TextAlign.center,
+                                    text: organizations[i * 3 + j].name,
+                                    color: AppThemes().secondary,
+                                    fontSize: 10.sp,
+                                    type: FontType.bold))
                           ])
                       ]))
           ])))

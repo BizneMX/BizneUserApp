@@ -6,6 +6,7 @@ import 'package:bizne_flutter_app/src/constants/routes.dart';
 import 'package:bizne_flutter_app/src/controllers/edit_phone/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/profile_home/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/verification_code/repository.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -73,6 +74,9 @@ class VerificationCodeController extends GetxController {
       return;
     }
 
+    await FirebaseAnalytics.instance.logEvent(
+        name: 'code_verification',
+        parameters: {'type': 'button', 'name': 'verify_phone'});
     Get.toNamed(register, arguments: phone);
   }
 

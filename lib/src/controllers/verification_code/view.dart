@@ -4,6 +4,7 @@ import 'package:bizne_flutter_app/src/components/my_text.dart';
 import 'package:bizne_flutter_app/src/components/text_filed.dart';
 import 'package:bizne_flutter_app/src/controllers/verification_code/controller.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -79,7 +80,13 @@ class VerificationCodePage extends GetWidget<VerificationCodeController> {
 
     final buttonsArea =
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-      const BizneSupportButton(),
+      BizneSupportButton(
+        analyticsCallFunction: () async {
+          await FirebaseAnalytics.instance.logEvent(
+              name: 'code_verification',
+              parameters: {'type': 'button', 'name': 'help'});
+        },
+      ),
       SizedBox(height: 3.h),
       BizneElevatedButton(
           onPressed: controller.currentParams.changePhone

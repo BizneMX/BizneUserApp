@@ -13,6 +13,7 @@ import 'package:bizne_flutter_app/src/controllers/generate_report/controller.dar
 import 'package:bizne_flutter_app/src/controllers/history_food/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/how_you_want_pay/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/myBizne/controller.dart';
+import 'package:bizne_flutter_app/src/controllers/my_reserves/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/notifications/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/pay_food/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/pay_with_qr/controller.dart';
@@ -66,6 +67,7 @@ class LayoutBinding extends Bindings {
     Get.put<EditProfileController>(EditProfileController());
     Get.put<PaymentMethodsController>(PaymentMethodsController());
     Get.put<AddPaymentMethodController>(AddPaymentMethodController());
+    Get.put<MyReserveController>(MyReserveController());
 
     //my-bizne
     Get.put<MyByzneController>(MyByzneController());

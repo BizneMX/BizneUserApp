@@ -4,6 +4,7 @@ import 'package:bizne_flutter_app/src/components/my_text.dart';
 import 'package:bizne_flutter_app/src/components/utils.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
 import 'package:custom_info_window/custom_info_window.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,8 @@ class MapPage extends GetView<MapController> {
           style: controller.mapStyle.value.isEmpty
               ? null
               : controller.mapStyle.value,
+          onCameraMoveStarted: () => FirebaseAnalytics.instance.logEvent(
+              name: 'map', parameters: {'type': 'button', 'name': 'whatsapp'}),
           onCameraMove: (position) {
             controller.onCameraMove(position);
             controller.customInfoWindowController.onCameraMove!();
@@ -62,13 +65,24 @@ class MapPage extends GetView<MapController> {
               ),
               MapButton(
                   onTap: () async {
+                    FirebaseAnalytics.instance.logEvent(
+                        name: 'map',
+                        parameters: {'type': 'button', 'name': 'whatsapp'});
                     await Utils.contactSupport();
                   },
                   color: AppThemes().green,
                   child: Image.asset('assets/icons/support_chat_white.png',
                       scale: 1.6)),
               MapButton(
-                  onTap: () => controller.goToUserLocation(),
+                  onTap: () {
+                    FirebaseAnalytics.instance.logEvent(
+                        name: 'map',
+                        parameters: {
+                          'type': 'button',
+                          'name': 'user_location'
+                        });
+                    controller.goToUserLocation();
+                  },
                   child: Container(
                       margin: EdgeInsets.only(right: 1.w),
                       child: Image.asset('assets/icons/go_location.png',

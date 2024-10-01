@@ -10,6 +10,7 @@ import 'package:bizne_flutter_app/src/controllers/layout/controller.dart';
 import 'package:bizne_flutter_app/src/controllers/map/view.dart';
 import 'package:bizne_flutter_app/src/models/establishmet.dart';
 import 'package:bizne_flutter_app/src/themes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -124,7 +125,7 @@ class HomePage extends LayoutRouteWidget<HomeController> {
                       (AppLocalizations.of(context)!.open, Icons.lock_open, 3),
                       // (AppLocalizations.of(context)!.closed, Icons.lock, 4)
                     ].map((e) => getFilter(e.$1, e.$2, e.$3))
-                  ])))
+                  ]))),
         ]));
 
     Widget mapArea(double height) => Obx(() => SizedBox(
@@ -173,6 +174,12 @@ class HomePage extends LayoutRouteWidget<HomeController> {
                             color: AppThemes().green,
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
+                                await FirebaseAnalytics.instance.logEvent(
+                                    name: 'map',
+                                    parameters: {
+                                      'type': 'button',
+                                      'name': 'whatsapp'
+                                    });
                                 await Utils.contactSupport();
                               }))
                   ]))
@@ -201,6 +208,9 @@ class HomePage extends LayoutRouteWidget<HomeController> {
         child: Obx(() => Row(children: [
               TabItem(
                   onTab: () {
+                    FirebaseAnalytics.instance.logEvent(
+                        name: 'main_navbar',
+                        parameters: {'type': 'button', 'name': 'fonda'});
                     controller.selectedService.call(true);
                     controller.filterPins();
                     controller.getEstablishments(clear: true);
@@ -209,6 +219,9 @@ class HomePage extends LayoutRouteWidget<HomeController> {
                   text: AppLocalizations.of(context)!.services),
               TabItem(
                   onTab: () {
+                    FirebaseAnalytics.instance.logEvent(
+                        name: 'main_navbar',
+                        parameters: {'type': 'button', 'name': 'restaurantes'});
                     controller.selectedService.call(false);
                     controller.filterPins();
                     controller.getEstablishments(clear: true);
@@ -259,62 +272,62 @@ class DraggableHome extends GetWidget<ScrollDraggerController> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragUpdate: (details) {
-        controller.dragUpdate(details.delta.dy);
-      },
-      child: DraggableScrollableSheet(
-          controller: controller.scrollDraggableController,
-          initialChildSize: controller.middle,
-          minChildSize: controller.bottom,
-          maxChildSize: controller.top,
-          builder: (BuildContext context, ScrollController scrollController) {
-            return Obx(() => Container(
-                decoration: BoxDecoration(
-                    color: controller.scroll.value == controller.bottom
-                        ? Colors.transparent
-                        : AppThemes().white,
-                    borderRadius: controller.scroll.value == controller.top
-                        ? null
-                        : const BorderRadius.only(
-                            topLeft: Radius.circular(19),
-                            topRight: Radius.circular(19))),
-                child: Column(children: [
-                  Padding(
-                      padding: EdgeInsets.symmetric(vertical: 0.8.h),
-                      child: controller.scroll.value == controller.top
-                          ? Divider(
-                              color: AppThemes().grey,
-                              thickness: 3,
-                              indent: 40.w,
-                              endIndent: 40.w)
-                          : Image.asset(
-                              color: AppThemes().grey,
-                              width: 20.w,
-                              'assets/icons/swipe_middle_bottom.png')),
-                  if (controller.scroll > controller.bottomMiddle)
+        onVerticalDragUpdate: (details) {
+          controller.dragUpdate(details.delta.dy);
+        },
+        child: DraggableScrollableSheet(
+            controller: controller.scrollDraggableController,
+            initialChildSize: controller.middle,
+            minChildSize: controller.bottom,
+            maxChildSize: controller.top,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return Obx(() => Container(
+                  decoration: BoxDecoration(
+                      color: controller.scroll.value == controller.bottom
+                          ? Colors.transparent
+                          : AppThemes().white,
+                      borderRadius: controller.scroll.value == controller.top
+                          ? null
+                          : const BorderRadius.only(
+                              topLeft: Radius.circular(19),
+                              topRight: Radius.circular(19))),
+                  child: Column(children: [
                     Padding(
-                        padding: EdgeInsets.only(bottom: 1.h), child: selected),
-                  Expanded(
-                      child: ListView.builder(
-                          controller: scrollController,
-                          itemCount: controller.establishments.length,
-                          itemBuilder: (buildContext, index) {
-                            controller
-                                .scrollControllerSubscribe(scrollController);
-                            final establishment =
-                                controller.establishments[index];
-                            return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 2.w, vertical: 1.h),
-                                child: CardItemService(
-                                    item: establishment,
-                                    navigate: navigate,
-                                    eatHere: transactionData,
-                                    tutorialKey:
-                                        index == 0 ? firstCard : null));
-                          }))
-                ])));
-          }),
-    );
+                        padding: EdgeInsets.symmetric(vertical: 0.8.h),
+                        child: controller.scroll.value == controller.top
+                            ? Divider(
+                                color: AppThemes().grey,
+                                thickness: 3,
+                                indent: 40.w,
+                                endIndent: 40.w)
+                            : Image.asset(
+                                color: AppThemes().grey,
+                                width: 20.w,
+                                'assets/icons/swipe_middle_bottom.png')),
+                    if (controller.scroll > controller.bottomMiddle)
+                      Padding(
+                          padding: EdgeInsets.only(bottom: 1.h),
+                          child: selected),
+                    Expanded(
+                        child: ListView.builder(
+                            controller: scrollController,
+                            itemCount: controller.establishments.length,
+                            itemBuilder: (buildContext, index) {
+                              controller
+                                  .scrollControllerSubscribe(scrollController);
+                              final establishment =
+                                  controller.establishments[index];
+                              return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 1.h),
+                                  child: CardItemService(
+                                      item: establishment,
+                                      navigate: navigate,
+                                      eatHere: transactionData,
+                                      tutorialKey:
+                                          index == 0 ? firstCard : null));
+                            }))
+                  ])));
+            }));
   }
 }
