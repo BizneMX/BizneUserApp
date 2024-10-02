@@ -41,7 +41,7 @@ Future<void> initServices() async {
   // Camera
   await Get.putAsync(() => CameraService().init());
 
-  Stripe.publishableKey = Environment.spriteApiKey;
+  Stripe.publishableKey = Environment.stripeApiKey;
   await Stripe.instance.applySettings();
 
   return;

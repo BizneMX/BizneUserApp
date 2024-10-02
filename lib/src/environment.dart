@@ -16,7 +16,7 @@ class Environment {
 
   static const appBundleId = 'mx.devbizne.bizne';
 
-  static const spriteApiKey = 'pk_test_TZX4xTSTBKK1GwbTl7Wza9cv00cY9tcgu3';
+  static const stripeApiKey = 'pk_test_TZX4xTSTBKK1GwbTl7Wza9cv00cY9tcgu3';
 
   static const termsAndConditions =
       'https://newadmin.bizne.com.mx/#/documents/terms';
