@@ -23,8 +23,8 @@ class RegisterPage extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     Widget buildPage() {
       FirebaseAnalytics.instance.logEvent(
-          name: 'registration',
-          parameters: {'name': 'step_${controller.selectedPage.value + 1}'});
+        name: 'user_app_registration_step_${controller.selectedPage.value + 1}'
+      );
       switch (controller.selectedPage.value) {
         case 0:
           return NamePage(nextPage: () => controller.nextPage());
@@ -44,16 +44,26 @@ class RegisterPage extends GetView<RegisterController> {
       BizneElevatedButton(
           onPressed: () async {
             await FirebaseAnalytics.instance.logEvent(
-                name: 'registration',
-                parameters: {'type': 'button', 'name': 'continue'});
+              name: 'user_app_registration',
+              parameters: {
+                'type': 'button',
+                'step': '${controller.selectedPage.value + 1}',
+                'name': 'continue'
+              }
+            );
             controller.nextPage();
           },
           title: AppLocalizations.of(context)!.continueText),
       SizedBox(height: 3.h),
       BizneSupportButton(analyticsCallFunction: () async {
         FirebaseAnalytics.instance.logEvent(
-            name: 'registration',
-            parameters: {'type': 'button', 'name': 'help'});
+          name: 'user_app_registration',
+          parameters: {
+            'type': 'button',
+            'step': '${controller.selectedPage.value + 1}',
+            'name': 'help'
+          }
+        );
       }),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         MyText(
@@ -118,8 +128,12 @@ class RegisterPage extends GetView<RegisterController> {
           SizedBox(height: 3.h),
           BizneSupportButton(analyticsCallFunction: () async {
             FirebaseAnalytics.instance.logEvent(
-                name: 'registration',
-                parameters: {'type': 'button', 'name': 'help'});
+              name: 'user_app_registration',
+              parameters: {
+                'type': 'button',
+                'name': 'after_help'
+              }
+            );
           })
         ]));
 
@@ -621,8 +635,13 @@ class OrganizationPage extends GetWidget<OrganizationController> {
                   heightFactor: 0.04,
                   onPressed: () async {
                     await FirebaseAnalytics.instance.logEvent(
-                        name: 'registration',
-                        parameters: {'type': 'button', 'name': 'select'});
+                      name: 'user_app_registration_organization_select',
+                      parameters: {
+                        'type': 'button',
+                        'step': '4',
+                        'name': 'select'
+                      }
+                    );
                     Get.back(result: true);
                   },
                   title: AppLocalizations.of(context)!.select),
@@ -632,8 +651,13 @@ class OrganizationPage extends GetWidget<OrganizationController> {
                   heightFactor: 0.04,
                   onPressed: () async {
                     await FirebaseAnalytics.instance.logEvent(
-                        name: 'registration',
-                        parameters: {'type': 'button', 'name': 'back'});
+                      name: 'user_app_registration',
+                      parameters: {
+                        'type': 'button',
+                        'step': '${controller.selectedPage.value + 1}',
+                        'name': 'back'
+                      }
+                    );
                     Get.back(result: false);
                   },
                   title: AppLocalizations.of(context)!.returnText)

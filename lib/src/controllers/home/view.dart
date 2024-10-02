@@ -175,11 +175,12 @@ class HomePage extends LayoutRouteWidget<HomeController> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 await FirebaseAnalytics.instance.logEvent(
-                                    name: 'map',
-                                    parameters: {
-                                      'type': 'button',
-                                      'name': 'whatsapp'
-                                    });
+                                  name: 'user_app_map',
+                                  parameters: {
+                                    'type': 'button',
+                                    'name': 'contact_support'
+                                  }
+                                );
                                 await Utils.contactSupport();
                               }))
                   ]))
@@ -209,8 +210,12 @@ class HomePage extends LayoutRouteWidget<HomeController> {
               TabItem(
                   onTab: () {
                     FirebaseAnalytics.instance.logEvent(
-                        name: 'main_navbar',
-                        parameters: {'type': 'button', 'name': 'fonda'});
+                      name: 'user_app_main_navbar',
+                      parameters: {
+                        'type': 'button',
+                        'name': 'fonda'
+                      }
+                    );
                     controller.selectedService.call(true);
                     controller.filterPins();
                     controller.getEstablishments(clear: true);
@@ -220,8 +225,12 @@ class HomePage extends LayoutRouteWidget<HomeController> {
               TabItem(
                   onTab: () {
                     FirebaseAnalytics.instance.logEvent(
-                        name: 'main_navbar',
-                        parameters: {'type': 'button', 'name': 'restaurantes'});
+                      name: 'user_app_main_navbar',
+                      parameters: {
+                        'type': 'button',
+                        'name': 'restaurant'
+                      }
+                    );
                     controller.selectedService.call(false);
                     controller.filterPins();
                     controller.getEstablishments(clear: true);

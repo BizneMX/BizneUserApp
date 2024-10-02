@@ -80,12 +80,16 @@ class WelcomePage extends StatelessWidget {
       Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         entranceOption('old_user', AppLocalizations.of(context)!.iHaveAccount,
             () async {
-          await FirebaseAnalytics.instance.logEvent(name: 'registered_user');
+          await FirebaseAnalytics.instance.logEvent(
+            name: 'user_app_home_registered_user'
+          );
           Get.toNamed(login, arguments: false);
         }, AppThemes().secondary, false),
         entranceOption('new_user', AppLocalizations.of(context)!.iAmNew,
             () async {
-          await FirebaseAnalytics.instance.logEvent(name: 'new_user');
+          await FirebaseAnalytics.instance.logEvent(
+            name: 'user_app_home_new_user'
+          );
           Get.toNamed(login, arguments: true);
         }, AppThemes().tertiary, false)
       ])
@@ -96,7 +100,9 @@ class WelcomePage extends StatelessWidget {
       BizneSupportButton(
         secondary: false,
         analyticsCallFunction: () async {
-          await FirebaseAnalytics.instance.logEvent(name: 'help');
+          await FirebaseAnalytics.instance.logEvent(
+            name: 'user_app_home_help'
+          );
         },
       ),
     ]);

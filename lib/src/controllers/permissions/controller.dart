@@ -13,7 +13,9 @@ class PermissionController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    FirebaseAnalytics.instance.logEvent(name: 'location');
+    FirebaseAnalytics.instance.logEvent(
+      name: 'user_app_system_location'
+    );
   }
 
   int permissionToInt() {
@@ -34,7 +36,12 @@ class PermissionController extends GetxController {
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
         await FirebaseAnalytics.instance.logEvent(
-            name: 'location', parameters: {'type': 'button', 'name': 'deny'});
+          name: 'user_app_system_location',
+          parameters: {
+            'type': 'button',
+            'name': 'deny'
+          }
+        );
         await func();
       }
     } while (permission == LocationPermission.denied ||
@@ -43,9 +50,16 @@ class PermissionController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('locationPermission', true);
     await FirebaseAnalytics.instance.logEvent(
-        name: 'location', parameters: {'type': 'button', 'name': 'allow'});
+      name: 'user_app_system_location',
+      parameters: {
+        'type': 'button',
+        'name': 'allow'
+      }
+    );
     await Get.putAsync(() => LocationProvide().init());
-    await FirebaseAnalytics.instance.logEvent(name: 'notifications');
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'user_app_system_notifications'
+    );
     actualPermission.value = Permission.notification;
   }
 
@@ -56,7 +70,12 @@ class PermissionController extends GetxController {
     await NotificationHandler().init();
     await PushNotifications().init();
     await FirebaseAnalytics.instance.logEvent(
-        name: 'notifications', parameters: {'type': 'button', 'name': 'allow'});
+      name: 'user_app_system_notifications',
+      parameters: {
+        'type': 'button',
+        'name': 'allow'
+      }
+    );
     endWelcome();
   }
 
@@ -64,7 +83,12 @@ class PermissionController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('notificationPermission', false);
     await FirebaseAnalytics.instance.logEvent(
-        name: 'notifications', parameters: {'type': 'button', 'name': 'deny'});
+      name: 'user_app_system_notifications',
+      parameters: {
+        'type': 'button',
+        'name': 'deny'
+      }
+    );
     endWelcome();
   }
 
