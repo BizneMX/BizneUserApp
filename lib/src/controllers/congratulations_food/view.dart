@@ -89,9 +89,9 @@ class CongratulationsFoodPage
               child: BizneElevatedChildButton(
                   secondary: true,
                   onPressed: () => FirebaseAnalytics.instance
-                          .logEvent(name: 'compra', parameters: {
+                          .logEvent(name: 'user_app_checkout_contact_bussiness', parameters: {
                         'type': 'button',
-                        'name': 'contacta_negocio',
+                        'name': 'contact_bussiness',
                         'store_id': currentParams.establishment.id.toString()
                       }).then((_) => controller.contactBusiness(
                               currentParams.establishment.phone)),
@@ -115,9 +115,9 @@ class CongratulationsFoodPage
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 4.h),
               child: BizneElevatedButton(
                   onPressed: () => FirebaseAnalytics.instance
-                          .logEvent(name: 'confirmacion', parameters: {
+                          .logEvent(name: 'user_app_checkout_confirmation', parameters: {
                         'type': 'button',
-                        'name': 'contacta_negocio',
+                        'name': 'confirmation',
                         'store_id': currentParams.establishment.id.toString()
                       }).then((_) => controller.close(currentParams)),
                   title: AppLocalizations.of(context)!.continueText))

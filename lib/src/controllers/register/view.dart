@@ -23,7 +23,12 @@ class RegisterPage extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     Widget buildPage() {
       FirebaseAnalytics.instance.logEvent(
-        name: 'user_app_registration_step_${controller.selectedPage.value + 1}'
+        name: 'user_app_registration_step_${controller.selectedPage.value + 1}',
+        parameters: {
+          'name': 'step',
+          'step': '${controller.selectedPage.value + 1}',
+          'type': 'viewPage'
+        }
       );
       switch (controller.selectedPage.value) {
         case 0:
@@ -654,7 +659,6 @@ class OrganizationPage extends GetWidget<OrganizationController> {
                       name: 'user_app_registration',
                       parameters: {
                         'type': 'button',
-                        'step': '${controller.selectedPage.value + 1}',
                         'name': 'back'
                       }
                     );

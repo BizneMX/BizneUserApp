@@ -53,7 +53,7 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.profile,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                name: 'app_user_profile',
+                name: 'app_user_profile_profile',
                 parameters: {
                   'type': 'button',
                   'name': 'profile'
@@ -66,7 +66,7 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.consumptionHistory,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                name: 'user_app_profile',
+                name: 'user_app_profile_consumption_history',
                 parameters: {
                   'type': 'button',
                   'name': 'consumption_history'
@@ -79,7 +79,7 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.foodHistory,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                name: 'user_app_profile',
+                name: 'user_app_profile_food_history',
                 parameters: {
                   'type': 'button',
                   'name': 'food_history'
@@ -92,7 +92,7 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.myReserves,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                name: 'user_app_profile',
+                name: 'user_app_profile_my_reservations',
                 parameters: {
                   'type': 'button',
                   'name': 'my_reservations'
@@ -105,7 +105,7 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.legal,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                name: 'user_app_profile',
+                name: 'user_app_profile_legal',
                 parameters: {
                   'type': 'button',
                   'name': 'legal'
@@ -135,7 +135,7 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
           padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: BizneSupportMyBizneButton(
             firebaseCall: () => FirebaseAnalytics.instance.logEvent(
-              name: 'user_app_profile',
+              name: 'user_app_profile_help',
               parameters: {
                 'type': 'button',
                 'name': 'help'

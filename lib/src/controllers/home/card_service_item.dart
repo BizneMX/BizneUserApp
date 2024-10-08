@@ -146,10 +146,10 @@ class CardItemService extends GetWidget<HomeController> {
                                                     await FirebaseAnalytics
                                                         .instance
                                                         .logEvent(
-                                                            name: 'main_navbar',
+                                                            name: 'user_app_menu_schedule',
                                                             parameters: {
                                                           'type': 'button',
-                                                          'name': 'agendar',
+                                                          'name': 'schedule',
                                                           'store_id':
                                                               item.id.toString()
                                                         });
@@ -188,10 +188,10 @@ class CardItemService extends GetWidget<HomeController> {
                                                   onPressed: () {
                                                     FirebaseAnalytics.instance
                                                         .logEvent(
-                                                            name: 'menu',
+                                                            name: 'user_app_menu_display',
                                                             parameters: {
                                                           'type': 'button',
-                                                          'name': 'ver',
+                                                          'name': 'display',
                                                           'store_id':
                                                               item.id.toString()
                                                         });
@@ -214,10 +214,10 @@ class CardItemService extends GetWidget<HomeController> {
                                                   onPressed: () {
                                                     FirebaseAnalytics.instance
                                                         .logEvent(
-                                                            name: 'menu',
+                                                            name: 'user_app_menu_eat_her',
                                                             parameters: {
                                                           'type': 'button',
-                                                          'name': 'come_aqui',
+                                                          'name': 'eat_here',
                                                           'store_id':
                                                               item.id.toString()
                                                         });
