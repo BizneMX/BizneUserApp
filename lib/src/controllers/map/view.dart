@@ -29,7 +29,12 @@ class MapPage extends GetView<MapController> {
               ? null
               : controller.mapStyle.value,
           onCameraMoveStarted: () => FirebaseAnalytics.instance.logEvent(
-              name: 'map', parameters: {'type': 'button', 'name': 'whatsapp'}),
+            name: 'user_app_map_help',
+            parameters: {
+              'type': 'button',
+              'name': 'help'
+            }
+          ),
           onCameraMove: (position) {
             controller.onCameraMove(position);
             controller.customInfoWindowController.onCameraMove!();
@@ -66,8 +71,12 @@ class MapPage extends GetView<MapController> {
               MapButton(
                   onTap: () async {
                     FirebaseAnalytics.instance.logEvent(
-                        name: 'map',
-                        parameters: {'type': 'button', 'name': 'whatsapp'});
+                      name: 'user_app_map_whatsapp',
+                      parameters: {
+                        'type': 'button',
+                        'name': 'whatsapp'
+                      }
+                    );
                     await Utils.contactSupport();
                   },
                   color: AppThemes().green,
@@ -76,11 +85,12 @@ class MapPage extends GetView<MapController> {
               MapButton(
                   onTap: () {
                     FirebaseAnalytics.instance.logEvent(
-                        name: 'map',
-                        parameters: {
-                          'type': 'button',
-                          'name': 'user_location'
-                        });
+                      name: 'user_app_map_location',
+                      parameters: {
+                        'type': 'button',
+                        'name': 'user_location'
+                      }
+                    );
                     controller.goToUserLocation();
                   },
                   child: Container(

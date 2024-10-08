@@ -119,9 +119,9 @@ class ConsumeYourFoodPage extends LayoutRouteWidget<ConsumeYourFoodController> {
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
           child: BizneElevatedButton(
             onPressed: () => FirebaseAnalytics.instance
-                .logEvent(name: 'compra', parameters: {
+                .logEvent(name: 'user_app_checkout_fonda', parameters: {
               'type': 'button',
-              'name': 'en_fonda',
+              'name': 'fonda',
               'store_id': currentParams.establishment.id.toString()
             }).then((_) => controller.transactionConfirm(currentParams, false)),
             title: AppLocalizations.of(context)!.inTheService,
@@ -131,9 +131,9 @@ class ConsumeYourFoodPage extends LayoutRouteWidget<ConsumeYourFoodController> {
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
           child: BizneElevatedButton(
             onPressed: () => FirebaseAnalytics.instance
-                .logEvent(name: 'compra', parameters: {
+                .logEvent(name: 'user_app_checkout_pickup', parameters: {
               'type': 'button',
-              'name': 'recoger',
+              'name': 'pickup',
               'store_id': currentParams.establishment.id.toString()
             }).then((_) => controller.transactionConfirm(currentParams, true)),
             title: AppLocalizations.of(context)!.toPickUp,
@@ -143,9 +143,9 @@ class ConsumeYourFoodPage extends LayoutRouteWidget<ConsumeYourFoodController> {
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
           child: BizneElevatedButton(
             onPressed: () => FirebaseAnalytics.instance
-                .logEvent(name: 'compra', parameters: {
+                .logEvent(name: 'user_app_checkout_back', parameters: {
               'type': 'button',
-              'name': 'regresar',
+              'name': 'back',
               'store_id': currentParams.establishment.id.toString()
             }).then((_) => controller.popNavigate()),
             title: AppLocalizations.of(context)!.returnText,

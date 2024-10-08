@@ -20,7 +20,12 @@ class MyByzneController extends LayoutRouteController {
 
     connection() ? getMyBizne() : getMyBizneOffline();
     FirebaseAnalytics.instance.logEvent(
-        name: 'main_menu', parameters: {'type': 'button', 'name': 'mi_saldo'});
+      name: 'user_app_main_menu_my_balance',
+      parameters: {
+        'type': 'button',
+        'name': 'my_balance'
+      }
+    );
     // if (!connection()) {
     //   Get.dialog(BizneDialog(
     //       text:

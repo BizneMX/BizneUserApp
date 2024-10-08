@@ -72,9 +72,9 @@ class RateServicePage extends LayoutRouteWidget<RateServiceController> {
                       EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
                   child: BizneElevatedButton(
                       onPressed: () => FirebaseAnalytics.instance
-                              .logEvent(name: 'confirmacion', parameters: {
+                              .logEvent(name: 'user_app_checkout_confirmation_feedback', parameters: {
                             'type': 'button',
-                            'name': 'calificar',
+                            'name': 'feedback',
                             'store_id':
                                 currentParams.establishment.id.toString()
                           }).then((_) => controller.rateService(currentParams)),
@@ -85,9 +85,9 @@ class RateServicePage extends LayoutRouteWidget<RateServiceController> {
                   child: BizneElevatedButton(
                       secondary: true,
                       onPressed: () => FirebaseAnalytics.instance
-                              .logEvent(name: 'confirmacion', parameters: {
+                              .logEvent(name: 'user_app_checkout_confirmation_skip', parameters: {
                             'type': 'button',
-                            'name': 'saltar',
+                            'name': 'skip',
                             'store_id':
                                 currentParams.establishment.id.toString()
                           }).then((_) => controller.navigate(home)),

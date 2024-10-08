@@ -59,11 +59,14 @@ class ServiceDetailsPage extends LayoutRouteWidget<ServiceDetailsController> {
           ])),
       IconButton(
           onPressed: () {
-            FirebaseAnalytics.instance.logEvent(name: 'menu', parameters: {
-              'type': 'button',
-              'name': 'ayuda',
-              'store_id': establishment.id.toString()
-            });
+            FirebaseAnalytics.instance.logEvent(
+              name: 'user_app_menu_help',
+              parameters: {
+                'type': 'button',
+                'name': 'help',
+                'store_id': establishment.id.toString()
+              }
+            );
             controller.contactBusiness(establishment.phone);
           },
           icon: Image.asset('assets/icons/phone.png', width: 10.w))
@@ -74,20 +77,26 @@ class ServiceDetailsPage extends LayoutRouteWidget<ServiceDetailsController> {
         child: Row(children: [
           TabItem(
               onTab: () => FirebaseAnalytics.instance
-                      .logEvent(name: 'menu', parameters: {
-                    'type': 'button',
-                    'name': 'menu_del_dia',
-                    'store_id': establishment.id.toString()
-                  }),
+                      .logEvent(
+                        name: 'user_app_menu_day_menu',
+                        parameters: {
+                          'type': 'button',
+                          'name': 'day_menu',
+                          'store_id': establishment.id.toString()
+                        }
+                      ),
               selected: true,
               text: AppLocalizations.of(context)!.menuOfDay),
           TabItem(
               onTab: () {
-                FirebaseAnalytics.instance.logEvent(name: 'menu', parameters: {
-                  'type': 'button',
-                  'name': 'horarios',
-                  'store_id': establishment.id.toString()
-                });
+                FirebaseAnalytics.instance.logEvent(
+                  name: 'user_app_menu_schedule',
+                  parameters: {
+                    'type': 'button',
+                    'name': 'schedule',
+                    'store_id': establishment.id.toString()
+                  }
+                );
                 controller.navigate(restaurantDetails, params: establishment);
               },
               selected: false,

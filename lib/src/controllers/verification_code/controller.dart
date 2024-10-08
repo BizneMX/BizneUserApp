@@ -75,8 +75,12 @@ class VerificationCodeController extends GetxController {
     }
 
     await FirebaseAnalytics.instance.logEvent(
-        name: 'code_verification',
-        parameters: {'type': 'button', 'name': 'verify_phone'});
+      name: 'user_app_registration_code_verification_help',
+      parameters: {
+        'type': 'button',
+        'name': 'help'
+      }
+    );
     Get.toNamed(register, arguments: phone);
   }
 

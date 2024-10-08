@@ -247,9 +247,9 @@ class PayFoodPage extends LayoutRouteWidget<PayFoodController> {
                 child: BizneElevatedButton(
                   onPressed: () async {
                     await FirebaseAnalytics.instance
-                        .logEvent(name: 'compra', parameters: {
+                        .logEvent(name: 'user_app_checkout_continue', parameters: {
                       'type': 'button',
-                      'name': 'continuar',
+                      'name': 'continue',
                       'store_id': currentParams.establishment.id.toString()
                     });
                     controller.continueButton(currentParams);
@@ -262,9 +262,9 @@ class PayFoodPage extends LayoutRouteWidget<PayFoodController> {
                   child: BizneElevatedButton(
                       onPressed: () async {
                         FirebaseAnalytics.instance
-                            .logEvent(name: 'compra', parameters: {
+                            .logEvent(name: 'user_app_checkout_cancel', parameters: {
                           'type': 'button',
-                          'name': 'cancelar',
+                          'name': 'cancel',
                           'store_id': currentParams.establishment.id.toString()
                         });
                         controller.popNavigate();

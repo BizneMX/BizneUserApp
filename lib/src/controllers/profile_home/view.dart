@@ -53,8 +53,12 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.profile,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                  name: 'perfil',
-                  parameters: {'type': 'button', 'name': 'perfil'});
+                name: 'app_user_profile_profile',
+                parameters: {
+                  'type': 'button',
+                  'name': 'profile'
+                }
+              );
               controller.navigate(profile, params: controller.user[0]);
             }
           ),
@@ -62,8 +66,12 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.consumptionHistory,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                  name: 'perfil',
-                  parameters: {'type': 'button', 'name': 'historial_consumo'});
+                name: 'user_app_profile_consumption_history',
+                parameters: {
+                  'type': 'button',
+                  'name': 'consumption_history'
+                }
+              );
               controller.consumptionHistoryButton();
             }
           ),
@@ -71,8 +79,12 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.foodHistory,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                  name: 'perfil',
-                  parameters: {'type': 'button', 'name': 'historial_comidas'});
+                name: 'user_app_profile_food_history',
+                parameters: {
+                  'type': 'button',
+                  'name': 'food_history'
+                }
+              );
               controller.navigate(historyFood);
             }
           ),
@@ -80,8 +92,12 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.myReserves,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                  name: 'perfil',
-                  parameters: {'type': 'button', 'name': 'mis_reservas'});
+                name: 'user_app_profile_my_reservations',
+                parameters: {
+                  'type': 'button',
+                  'name': 'my_reservations'
+                }
+              );
               controller.navigate(myReserves);
             }
           ),
@@ -89,8 +105,12 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
             AppLocalizations.of(context)!.legal,
             () async {
               await FirebaseAnalytics.instance.logEvent(
-                  name: 'perfil',
-                  parameters: {'type': 'button', 'name': 'legal'});
+                name: 'user_app_profile_legal',
+                parameters: {
+                  'type': 'button',
+                  'name': 'legal'
+                }
+              );
               controller.navigate(termsAndConditions,
                   params: controller.user[0]);
             }
@@ -115,8 +135,12 @@ class ProfileHomePage extends LayoutRouteWidget<ProfileHomeController> {
           padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: BizneSupportMyBizneButton(
             firebaseCall: () => FirebaseAnalytics.instance.logEvent(
-                name: 'perfil',
-                parameters: {'type': 'button', 'name': 'ayuda'}),
+              name: 'user_app_profile_help',
+              parameters: {
+                'type': 'button',
+                'name': 'help'
+              }
+            ),
           ),
         ),
         SizedBox(

@@ -106,8 +106,12 @@ class LoginPage extends GetWidget<LoginController> {
       BizneSupportButton(
         analyticsCallFunction: () async {
           await FirebaseAnalytics.instance.logEvent(
-              name: 'start_registration',
-              parameters: {'type': 'button', 'name': 'help'});
+            name: 'user_app_registration_start_support',
+            parameters: {
+              'name': 'support',
+              'type': 'button'
+            }
+          );
         },
       ),
     ]);

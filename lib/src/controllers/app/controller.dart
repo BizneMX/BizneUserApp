@@ -18,7 +18,12 @@ class AppController extends LayoutRouteController {
   void onInit() {
     super.onInit();
     FirebaseAnalytics.instance.logEvent(
-        name: 'main_menu', parameters: {'type': 'button', 'name': 'qr'});
+      name: 'user_app_main_menu_qr',
+      parameters: {
+        'type': 'button',
+        'name': 'qr'
+      }
+    );
   }
 
   String cleanScanData(String data) {

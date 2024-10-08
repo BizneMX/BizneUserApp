@@ -20,7 +20,12 @@ class NotificationsController extends LayoutRouteController {
   void onInit() {
     super.onInit();
     FirebaseAnalytics.instance.logEvent(
-        name: 'main_menu', parameters: {'type': 'button', 'name': 'alertas'});
+      name: 'user_app_main_menu_alerts',
+      parameters: {
+        'type': 'button',
+        'name': 'alerts'
+      }
+    );
   }
 
   void seeMore() {
