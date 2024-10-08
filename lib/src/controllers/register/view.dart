@@ -49,7 +49,7 @@ class RegisterPage extends GetView<RegisterController> {
       BizneElevatedButton(
           onPressed: () async {
             await FirebaseAnalytics.instance.logEvent(
-              name: 'user_app_registration',
+              name: 'user_app_registration_step_${controller.selectedPage.value + 1}_continue',
               parameters: {
                 'type': 'button',
                 'step': '${controller.selectedPage.value + 1}',
@@ -62,7 +62,7 @@ class RegisterPage extends GetView<RegisterController> {
       SizedBox(height: 3.h),
       BizneSupportButton(analyticsCallFunction: () async {
         FirebaseAnalytics.instance.logEvent(
-          name: 'user_app_registration',
+          name: 'user_app_registration_step_${controller.selectedPage.value + 1}_help',
           parameters: {
             'type': 'button',
             'step': '${controller.selectedPage.value + 1}',
@@ -133,7 +133,7 @@ class RegisterPage extends GetView<RegisterController> {
           SizedBox(height: 3.h),
           BizneSupportButton(analyticsCallFunction: () async {
             FirebaseAnalytics.instance.logEvent(
-              name: 'user_app_registration',
+              name: 'user_app_registration_help',
               parameters: {
                 'type': 'button',
                 'name': 'after_help'
@@ -640,7 +640,7 @@ class OrganizationPage extends GetWidget<OrganizationController> {
                   heightFactor: 0.04,
                   onPressed: () async {
                     await FirebaseAnalytics.instance.logEvent(
-                      name: 'user_app_registration_organization_select',
+                      name: 'user_app_registration_step_4_organization_select',
                       parameters: {
                         'type': 'button',
                         'step': '4',
@@ -656,7 +656,7 @@ class OrganizationPage extends GetWidget<OrganizationController> {
                   heightFactor: 0.04,
                   onPressed: () async {
                     await FirebaseAnalytics.instance.logEvent(
-                      name: 'user_app_registration',
+                      name: 'user_app_registration_back',
                       parameters: {
                         'type': 'button',
                         'name': 'back'

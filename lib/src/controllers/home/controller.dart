@@ -187,7 +187,7 @@ class HomeController extends LayoutRouteController {
       firebaseOption = 'abiertas';
     }
     await FirebaseAnalytics.instance.logEvent(
-      name: 'user_app_map',
+      name: 'user_app_map_${firebaseOption}',
       parameters: {
         'type': 'button',
         'name': firebaseOption

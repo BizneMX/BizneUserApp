@@ -90,8 +90,11 @@ class LoginController extends GetxController {
     }
 
     FirebaseAnalytics.instance.logEvent(
-      name: 'user_app_registration_starts',
-      parameters: { 'value': 'start', 'type': 'button' }
+      name: 'user_app_registration_start',
+      parameters: {
+        'name': 'start',
+        'type': 'button'
+      }
     );
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('jumpWelcome', true);

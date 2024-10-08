@@ -83,7 +83,7 @@ class VerificationCodePage extends GetWidget<VerificationCodeController> {
       BizneSupportButton(
         analyticsCallFunction: () async {
           await FirebaseAnalytics.instance.logEvent(
-            name: 'user_app_registration_code_verification',
+            name: 'user_app_registration_code_verification_verify_phone',
             parameters: {
               'type': 'button',
               'name': 'verify_phone'

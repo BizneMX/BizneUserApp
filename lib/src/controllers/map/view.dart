@@ -29,7 +29,7 @@ class MapPage extends GetView<MapController> {
               ? null
               : controller.mapStyle.value,
           onCameraMoveStarted: () => FirebaseAnalytics.instance.logEvent(
-            name: 'user_app_map',
+            name: 'user_app_map_help',
             parameters: {
               'type': 'button',
               'name': 'help'
@@ -71,7 +71,7 @@ class MapPage extends GetView<MapController> {
               MapButton(
                   onTap: () async {
                     FirebaseAnalytics.instance.logEvent(
-                      name: 'user_app_map',
+                      name: 'user_app_map_whatsapp',
                       parameters: {
                         'type': 'button',
                         'name': 'whatsapp'
@@ -85,7 +85,7 @@ class MapPage extends GetView<MapController> {
               MapButton(
                   onTap: () {
                     FirebaseAnalytics.instance.logEvent(
-                      name: 'user_app_map',
+                      name: 'user_app_map_location',
                       parameters: {
                         'type': 'button',
                         'name': 'user_location'

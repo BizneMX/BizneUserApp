@@ -17,7 +17,7 @@ class ProfileHomeController extends LayoutRouteController {
   void onInit() {
     super.onInit();
     FirebaseAnalytics.instance.logEvent(
-      name: 'user_app_main_menu',
+      name: 'user_app_main_menu_profile',
       parameters: {
         'type': 'button',
         'name': 'profile'

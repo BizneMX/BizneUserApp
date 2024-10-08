@@ -214,7 +214,7 @@ class CardItemService extends GetWidget<HomeController> {
                                                   onPressed: () {
                                                     FirebaseAnalytics.instance
                                                         .logEvent(
-                                                            name: 'user_app_menu_eat_her',
+                                                            name: 'user_app_menu_eat_here',
                                                             parameters: {
                                                           'type': 'button',
                                                           'name': 'eat_here',

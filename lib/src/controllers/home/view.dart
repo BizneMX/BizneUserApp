@@ -175,7 +175,7 @@ class HomePage extends LayoutRouteWidget<HomeController> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 await FirebaseAnalytics.instance.logEvent(
-                                  name: 'user_app_map',
+                                  name: 'user_app_map_contact_support',
                                   parameters: {
                                     'type': 'button',
                                     'name': 'contact_support'
@@ -210,7 +210,7 @@ class HomePage extends LayoutRouteWidget<HomeController> {
               TabItem(
                   onTab: () {
                     FirebaseAnalytics.instance.logEvent(
-                      name: 'user_app_main_navbar',
+                      name: 'user_app_main_navbar_fonda',
                       parameters: {
                         'type': 'button',
                         'name': 'fonda'
@@ -225,7 +225,7 @@ class HomePage extends LayoutRouteWidget<HomeController> {
               TabItem(
                   onTab: () {
                     FirebaseAnalytics.instance.logEvent(
-                      name: 'user_app_main_navbar',
+                      name: 'user_app_main_navbar_restaurant',
                       parameters: {
                         'type': 'button',
                         'name': 'restaurant'
